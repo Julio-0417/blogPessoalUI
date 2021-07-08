@@ -26,10 +26,14 @@ export class TemaComponent implements OnInit {
 
     this.temaService.refreshToken()
 
-    this.findAllTemas()
+    this.findAllTemas()   //toda a vez que iniciar a página, chamará o método
   }
 
-  
+  findAllTemas(){
+    this.temaService.getAllTema().subscribe((resp: Tema[])=>{
+      this.listaTemas = resp
+    })
+  }
 
   cadastrar(){
     this.temaService.postTema(this.tema).subscribe((resp: Tema)=>{
@@ -40,10 +44,6 @@ export class TemaComponent implements OnInit {
     })
   }
 
-  findAllTemas(){
-    this.temaService.getAllTema().subscribe((resp: Tema[])=>{
-      this.listaTemas = resp
-    })
-  }
+  
 
 }
